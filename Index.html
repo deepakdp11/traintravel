@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Travel Itinerary Timeline</title>
+
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -13,17 +14,20 @@
     line-height: 1.6;
     color: #333;
   }
+
   h1 {
     text-align: center;
     color: #2c3e50;
     margin-top: 20px;
   }
+
   .timeline {
     position: relative;
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 10px;
   }
+
   .timeline::after {
     content: '';
     position: absolute;
@@ -34,16 +38,17 @@
     left: 50%;
     margin-left: -3px;
   }
+
   .container {
     padding: 20px 30px;
     position: relative;
     width: 50%;
     box-sizing: border-box;
-    word-wrap: break-word;
-    word-break: break-word;
   }
+
   .container.left { left: 0; }
   .container.right { left: 50%; }
+
   .container::after {
     content: '';
     position: absolute;
@@ -56,17 +61,30 @@
     border-radius: 50%;
     z-index: 1;
   }
+
   .container.right::after { left: -13px; }
+
   .content {
     padding: 15px 20px;
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
   }
+
+  .day-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #2980b9;
+  }
+
+  .time {
+    font-weight: bold;
+    display: block;
+    color: #2c3e50;
+    margin-top: 5px;
+  }
+
   .train {
     background: #3498db;
     color: #fff;
@@ -75,54 +93,45 @@
     display: inline-block;
     margin: 5px 0;
     font-size: 0.9em;
-    word-wrap: break-word;
   }
-  .alternate { background: #e74c3c; }
-  .day-title { font-weight: bold; margin-bottom: 10px; font-size: 1.2em; color: #2980b9; }
-  .time { font-weight: bold; margin-bottom: 5px; display: block; color: #2c3e50; }
-  .collapsible {
-    background-color: #e74c3c;
-    color: white;
-    cursor: pointer;
-    padding: 8px 12px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 0.95em;
-    border-radius: 4px;
-    margin-top: 10px;
-    box-sizing: border-box;
+
+  .alternate {
+    background: #e74c3c;
   }
-  .active, .collapsible:hover { background-color: #c0392b; }
-  .content-collapsible {
-    padding: 0 15px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
+
+  .alternate-route-title {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #c0392b;
+  }
+
+  .alternate-route {
+    margin-top: 8px;
+    padding: 10px 15px;
     background-color: #f9eaea;
-    margin-top: 5px;
     border-radius: 4px;
-    word-wrap: break-word;
   }
-  .content-collapsible p { margin: 10px 0; }
+
   @media screen and (max-width: 768px) {
-    .container.left, .container.right {
+    .container {
       width: 100%;
       padding-left: 70px;
       padding-right: 25px;
-      left: 0;
+      left: 0 !important;
       margin-bottom: 30px;
     }
-    .container::after { left: 60px; }
-    .timeline::after { left: 30px; }
-  }
-  span, p, .train, .content { 
-    word-break: break-word;
-    overflow-wrap: break-word;
+
+    .container::after {
+      left: 60px;
+    }
+
+    .timeline::after {
+      left: 30px;
+    }
   }
 </style>
 </head>
+
 <body>
 
 <h1>Travel Itinerary Timeline</h1>
@@ -163,19 +172,35 @@
   <div class="container right">
     <div class="content">
       <div class="day-title">Day 4 – Monday | Madurai ↔ Rameswaram</div>
+
       <span class="time">03:00 – Depart Madurai (MDU)</span>
       Train: <span class="train">Cape RMM SF Exp / 22622</span><br>
-      <span class="time">06:15 – Arrive Rameswaram (RMM)</span><br>
+
+      <span class="time">06:15 – Arrive Rameswaram (RMM)</span>
       Sightseeing: Ramanathaswamy Temple, Agni Theertham, Pamban Bridge<br>
+
       <span class="time">20:50 – Depart Rameswaram (RMM)</span>
       Train: <span class="train">Cape RMM SF Exp / 22621</span><br>
+
       <span class="time">23:45 – Arrive Madurai (MDU)</span>
 
-      <button class="collapsible">Show Alternate Route</button>
-      <div class="content-collapsible">
-        <p><strong>Madurai → Rameswaram:</strong> 07:00 – MDU, Train: <span class="train alternate">Madurai–Rameswaram Passenger / 56713</span>, 10:25 – RMM</p>
-        <p><strong>Rameswaram → Madurai:</strong> 18:20 – RMM, Train: <span class="train alternate">Rameswaram–Madurai Passenger / 56714</span>, 22:05 – MDU</p>
+      <!-- Alternate Route (Always Visible) -->
+      <div class="alternate-route-title">Alternate Route</div>
+      <div class="alternate-route">
+        <p>
+          <strong>Madurai → Rameswaram:</strong>
+          07:00 – MDU,
+          Train: <span class="train alternate">Madurai–Rameswaram Passenger / 56713</span>,
+          10:25 – RMM
+        </p>
+        <p>
+          <strong>Rameswaram → Madurai:</strong>
+          18:20 – RMM,
+          Train: <span class="train alternate">Rameswaram–Madurai Passenger / 56714</span>,
+          22:05 – MDU
+        </p>
       </div>
+
     </div>
   </div>
 
@@ -184,29 +209,14 @@
     <div class="content">
       <div class="day-title">Day 5 – Tuesday to Wednesday | Madurai → Nagpur → Bhopal</div>
       <span class="time">01:05 – Depart Madurai (MDU)</span>
-      Train: <span class="train">Tamil Nadu Sampark Kranti Express / 12651 NZM S Krnti Exp</span><br>
-      <span class="time">01:55 – Arrive Nagpur (NGP)</span> (short transit)<br>
-      <span class="time">08:15 – Arrive Bhopal (BPL)</span><br>
+      Train: <span class="train">Tamil Nadu Sampark Kranti Express / 12651</span><br>
+      <span class="time">01:55 – Arrive Nagpur (NGP)</span>
+      <span class="time">08:15 – Arrive Bhopal (BPL)</span>
       Journey Completed
     </div>
   </div>
 
 </div>
-
-<script>
-  const coll = document.getElementsByClassName("collapsible");
-  for (let i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      const content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
-    });
-  }
-</script>
 
 </body>
 </html>
