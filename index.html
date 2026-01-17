@@ -99,7 +99,6 @@
     background: #e74c3c;
   }
 
-  /* Alternate Route UI */
   .alternate-route-title {
     margin-top: 18px;
     font-weight: bold;
@@ -128,6 +127,25 @@
     color: #2c3e50;
   }
 
+  #downloadPdf {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 999;
+  }
+
+  #downloadPdf:hover {
+    background: #1a252f;
+  }
+
   @media screen and (max-width: 768px) {
     .container {
       width: 100%;
@@ -154,7 +172,6 @@
 
 <div class="timeline">
 
-  <!-- Day 1 -->
   <div class="container left">
     <div class="content">
       <div class="day-title">📅 Day 1 – Friday | Bhopal → Coimbatore</div>
@@ -164,7 +181,6 @@
     </div>
   </div>
 
-  <!-- Day 2 -->
   <div class="container right">
     <div class="content">
       <div class="day-title">📅 Day 2 – Saturday | Full Day on Train</div>
@@ -173,7 +189,6 @@
     </div>
   </div>
 
-  <!-- Day 3 -->
   <div class="container left">
     <div class="content">
       <div class="day-title">📅 Day 3 – Sunday | Coimbatore Sightseeing & Travel to Madurai</div>
@@ -184,7 +199,6 @@
     </div>
   </div>
 
-  <!-- Day 4 -->
   <div class="container right">
     <div class="content">
       <div class="day-title">📅 Day 4 – Monday | Madurai ↔ Rameswaram</div>
@@ -221,7 +235,6 @@
     </div>
   </div>
 
-  <!-- Day 5 -->
   <div class="container left">
     <div class="content">
       <div class="day-title">📅 Day 5 – Tuesday | Full Day on Train</div>
@@ -235,7 +248,6 @@
     </div>
   </div>
 
-  <!-- Day 6 -->
   <div class="container right">
     <div class="content">
       <div class="day-title">📅 Day 6 – Wednesday | Arrival Day</div>
@@ -246,6 +258,22 @@
   </div>
 
 </div>
+
+<button id="downloadPdf">📄 Download Itinerary (PDF)</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  document.getElementById('downloadPdf').addEventListener('click', function () {
+    const element = document.querySelector('.timeline');
+    html2pdf().set({
+      margin: 0.5,
+      filename: 'Travel-Itinerary.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    }).from(element).save();
+  });
+</script>
 
 </body>
 </html>
